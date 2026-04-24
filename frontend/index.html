@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Streamlit injects HTML into an iframe, so relative paths won't work perfectly unless we inject the content. 
+         Wait, since Streamlit's `components.html` can't easily load local JS files when deployed or without static serving, 
+         we should write a Python wrapper that reads these files and injects them as inline strings, 
+         or just write them as a single string.
+         Since I extracted them to files, I will read these files in pe.py and inject them into <style> and <script>.
+    -->
+    <style id="injected-css"></style>
+</head>
+<body>
+
+    <div class="header-controls">
+        <div class="button-group">
+            <button id="btn-cat" class="active">Classification</button>
+            <button id="btn-en">Electronegativity</button>
+            <button id="btn-ep">Electropositivity</button>
+            <button id="btn-disc">Year Discovered</button>
+            <button id="btn-detail">Full Details</button>
+        </div>
+        <div class="button-group">
+            <input type="text" id="search-input" placeholder="Search element..." style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); background-color: var(--panel-bg); color: var(--text-main); font-size: 14px; outline: none; backdrop-filter: blur(5px);">
+            <button id="btn-search" style="background-color: var(--accent); border-color: var(--accent); color: white;">🔍 Search</button>
+            <button id="btn-compare" class="compare-mode">Enable Compare Mode</button>
+            <button id="btn-reaction" class="reaction-mode">Reaction Simulator</button>
+        </div>
+        <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="table-wrapper">
+        <div class="period-labels" id="period-labels"></div>
+        <div>
+            <div class="group-labels" id="group-labels"></div>
+            <div class="periodic-table" id="table"></div>
+        </div>
+    </div>
+
+    <div class="f-block-container">
+        <div class="f-block-label">* Lanthanides (Period 6, f-block)</div>
+        <div class="f-block" id="lanthanides"></div>
+
+        <div class="f-block-label" style="margin-top: 20px;">** Actinides (Period 7, f-block)</div>
+        <div class="f-block" id="actinides"></div>
+    </div>
+
+    <div class="dashboard">
+        <div class="panel" id="info-panel">
+            <h2>Element Information</h2>
+            <div id="info-content">
+                <p style="color: #9ca3af; font-size: 13px;">
+                    💡 <strong>Hover over an element</strong> to preview, or <strong>click an element</strong> to lock its properties here.
+                </p>
+            </div>
+        </div>
+        <div class="panel" id="compare-panel" style="display: none;">
+            <h2>⚖️ Comparison Mode</h2>
+            <div id="compare-content"></div>
+        </div>
+        <div class="panel" id="reaction-panel" style="display: none;">
+            <h2>🧪 Reaction Simulator</h2>
+            <div id="reaction-content"></div>
+        </div>
+    </div>
+
+    <script id="injected-js" type="module"></script>
+</body>
+</html>
