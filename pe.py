@@ -13,57 +13,86 @@ class PeriodicTableApp:
         self.init_chemical_data()
 
     def init_chemical_data(self):
-        # 40+ Metals / Cations (with their valencies/oxidation states)
+        # ==========================================
+        # 1. Basic / Electro-positive Radicals
+        # ==========================================
         self.metals = {
-            'Li': 1, 'Na': 1, 'K': 1, 'Rb': 1, 'Cs': 1, 'Ag': 1, 'Cu_I (Cuprous)': 1, 'Au_I': 1, 'NH4 (Ammonium)': 1,
-            'Be': 2, 'Mg': 2, 'Ca': 2, 'Sr': 2, 'Ba': 2, 'Zn': 2, 'Cd': 2, 'Ni': 2, 
-            'Cu_II (Cupric)': 2, 'Fe_II (Ferrous)': 2, 'Co_II': 2, 'Hg_II': 2, 'Sn_II (Stannous)': 2, 'Pb_II': 2, 'Mn_II': 2,
-            'Al': 3, 'Fe_III (Ferric)': 3, 'Cr_III': 3, 'Ga': 3, 'In': 3, 'Bi': 3, 'Au_III': 3, 'Co_III': 3, 'Sb_III': 3, 'As_III': 3,
-            'Ti_IV': 4, 'Sn_IV (Stannic)': 4, 'Pb_IV': 4, 'Zr': 4, 'Pt': 4, 'U_IV': 4, 'Th': 4,
-            'W_VI': 6
+            'H (Hydrogen)': 1, 'Li (Lithium)': 1, 'Na (Sodium)': 1, 'K (Potassium)': 1, 'Rb (Rubidium)': 1, 'Cs (Cesium)': 1, 
+            'Ag (Silver)': 1, 'Cu_I (Cuprous)': 1, 'Au_I (Aurous)': 1, 'NH4 (Ammonium)': 1, 'Hg_I (Mercurous)': 1,
+            'Be (Beryllium)': 2, 'Mg (Magnesium)': 2, 'Ca (Calcium)': 2, 'Sr (Strontium)': 2, 'Ba (Barium)': 2, 
+            'Zn (Zinc)': 2, 'Cd (Cadmium)': 2, 'Ni (Nickel)': 2, 'Cu_II (Cupric)': 2, 'Fe_II (Ferrous)': 2, 
+            'Co_II (Cobaltous)': 2, 'Hg_II (Mercuric)': 2, 'Sn_II (Stannous)': 2, 'Pb_II (Plumbous)': 2, 'Mn_II (Manganese)': 2,
+            'Al (Aluminum)': 3, 'Fe_III (Ferric)': 3, 'Cr_III (Chromium)': 3, 'Ga (Gallium)': 3, 'In (Indium)': 3, 
+            'Bi (Bismuth)': 3, 'Au_III (Auric)': 3, 'Co_III (Cobaltic)': 3, 'Sb_III (Antimony)': 3, 'As_III (Arsenic)': 3,
+            'Ti_IV (Titanium)': 4, 'Sn_IV (Stannic)': 4, 'Pb_IV (Plumbic)': 4, 'Zr (Zirconium)': 4, 'Pt (Platinum)': 4, 
+            'U_IV (Uranium)': 4, 'Th (Thorium)': 4,
+            'W_VI (Tungsten)': 6
         }
         
-        # 25+ Nonmetals & Polyatomic Anions (with absolute valencies for criss-cross)
+        # ==========================================
+        # 2. Acidic / Electro-negative Radicals
+        # ==========================================
         self.nonmetals = {
-            'F': 1, 'Cl': 1, 'Br': 1, 'I': 1, 'OH (Hydroxide)': 1, 'NO3 (Nitrate)': 1, 'NO2 (Nitrite)': 1, 'HCO3 (Bicarbonate)': 1, 'ClO3 (Chlorate)': 1, 'MnO4 (Permanganate)': 1,
-            'O': 2, 'S': 2, 'Se': 2, 'SO4 (Sulfate)': 2, 'SO3 (Sulfite)': 2, 'CO3 (Carbonate)': 2, 'CrO4 (Chromate)': 2, 'Cr2O7 (Dichromate)': 2,
-            'N': 3, 'P': 3, 'PO4 (Phosphate)': 3, 'PO3 (Phosphite)': 3, 'As': 3,
-            'C': 4, 'Si': 4
+            # Monovalent (1)
+            'F (Fluoride)': 1, 'Cl (Chloride)': 1, 'Br (Bromide)': 1, 'I (Iodide)': 1, 
+            'OH (Hydroxide)': 1, 'NO3 (Nitrate)': 1, 'NO2 (Nitrite)': 1, 'HCO3 (Bicarbonate)': 1, 
+            'ClO3 (Chlorate)': 1, 'ClO (Hypochlorite)': 1, 'BrO (Hypobromite)': 1, 'IO (Hypoiodite)': 1, 
+            'IO3 (Iodate)': 1, 'HSO3 (Bisulphite)': 1, 'HSO4 (Bisulphate)': 1, 'H (Hydride)': 1, 
+            'CH3COO (Acetate)': 1, 'CN (Cyanide)': 1, 'MnO4 (Permanganate)': 1, 'AlO2 (Meta-aluminate)': 1,
+            # Divalent (2)
+            'O (Oxide)': 2, 'S (Sulphide)': 2, 'Se (Selenide)': 2, 'SO4 (Sulphate)': 2, 'SO3 (Sulphite)': 2, 
+            'CO3 (Carbonate)': 2, 'CrO4 (Chromate)': 2, 'Cr2O7 (Dichromate)': 2, 'O2 (Peroxide)': 2, 
+            'S2O3 (Thiosulphate)': 2, 'MnO4_2 (Manganate)': 2, 'ZnO2 (Zincate)': 2, 'SnO3 (Stannate)': 2, 
+            'SiO3 (Silicate)': 2,
+            # Trivalent (3)
+            'N (Nitride)': 3, 'P (Phosphide)': 3, 'PO4 (Phosphate)': 3, 'PO3 (Phosphite)': 3, 
+            'As (Arsenide)': 3, 'BO3 (Borate)': 3, 'Fe(CN)6_3 (Ferricyanide)': 3, 'AsO3 (Arsenite)': 3, 
+            'AsO4 (Arsenate)': 3, 'AlO3 (Aluminate)': 3,
+            # Tetravalent (4)
+            'C (Carbide)': 4, 'Si (Silicide)': 4, 'Fe(CN)6_4 (Ferrocyanide)': 4
         }
         
-        # 40+ Compounds mapped to their constituent (Cation, Anion) for displacement logic
+        # Expanded Compounds (Added Water)
         self.compounds = {
-            'NaCl (Sodium Chloride)': ('Na', 'Cl'), 'KCl (Potassium Chloride)': ('K', 'Cl'), 'AgCl (Silver Chloride)': ('Ag', 'Cl'),
-            'MgCl2 (Magnesium Chloride)': ('Mg', 'Cl'), 'CaCl2 (Calcium Chloride)': ('Ca', 'Cl'), 'BaCl2 (Barium Chloride)': ('Ba', 'Cl'),
-            'CuCl2 (Copper II Chloride)': ('Cu_II (Cupric)', 'Cl'), 'FeCl3 (Iron III Chloride)': ('Fe_III (Ferric)', 'Cl'), 'AlCl3 (Aluminum Chloride)': ('Al', 'Cl'),
-            'Na2SO4 (Sodium Sulfate)': ('Na', 'SO4 (Sulfate)'), 'K2SO4 (Potassium Sulfate)': ('K', 'SO4 (Sulfate)'),
-            'CaSO4 (Calcium Sulfate)': ('Ca', 'SO4 (Sulfate)'), 'BaSO4 (Barium Sulfate)': ('Ba', 'SO4 (Sulfate)'),
-            'CuSO4 (Copper Sulfate)': ('Cu_II (Cupric)', 'SO4 (Sulfate)'), 'ZnSO4 (Zinc Sulfate)': ('Zn', 'SO4 (Sulfate)'), 'FeSO4 (Iron II Sulfate)': ('Fe_II (Ferrous)', 'SO4 (Sulfate)'),
-            'NaNO3 (Sodium Nitrate)': ('Na', 'NO3 (Nitrate)'), 'KNO3 (Potassium Nitrate)': ('K', 'NO3 (Nitrate)'), 'AgNO3 (Silver Nitrate)': ('Ag', 'NO3 (Nitrate)'),
-            'Pb(NO3)2 (Lead Nitrate)': ('Pb_II', 'NO3 (Nitrate)'), 'Ca(NO3)2 (Calcium Nitrate)': ('Ca', 'NO3 (Nitrate)'),
-            'Na2CO3 (Sodium Carbonate)': ('Na', 'CO3 (Carbonate)'), 'K2CO3 (Potassium Carbonate)': ('K', 'CO3 (Carbonate)'),
-            'CaCO3 (Calcium Carbonate)': ('Ca', 'CO3 (Carbonate)'), 'MgCO3 (Magnesium Carbonate)': ('Mg', 'CO3 (Carbonate)'),
-            'NaHCO3 (Sodium Bicarbonate)': ('Na', 'HCO3 (Bicarbonate)'),
-            'Na3PO4 (Sodium Phosphate)': ('Na', 'PO4 (Phosphate)'), 'Ca3(PO4)2 (Calcium Phosphate)': ('Ca', 'PO4 (Phosphate)'),
-            'CuO (Copper II Oxide)': ('Cu_II (Cupric)', 'O'), 'ZnO (Zinc Oxide)': ('Zn', 'O'), 'MgO (Magnesium Oxide)': ('Mg', 'O')
+            'H2O (Water)': ('H (Hydrogen)', 'O (Oxide)'),
+            'NaCl (Sodium Chloride)': ('Na (Sodium)', 'Cl (Chloride)'), 'KCl (Potassium Chloride)': ('K (Potassium)', 'Cl (Chloride)'), 'AgCl (Silver Chloride)': ('Ag (Silver)', 'Cl (Chloride)'),
+            'MgCl2 (Magnesium Chloride)': ('Mg (Magnesium)', 'Cl (Chloride)'), 'CaCl2 (Calcium Chloride)': ('Ca (Calcium)', 'Cl (Chloride)'), 'BaCl2 (Barium Chloride)': ('Ba (Barium)', 'Cl (Chloride)'),
+            'CuCl2 (Copper II Chloride)': ('Cu_II (Cupric)', 'Cl (Chloride)'), 'FeCl3 (Iron III Chloride)': ('Fe_III (Ferric)', 'Cl (Chloride)'), 'AlCl3 (Aluminum Chloride)': ('Al (Aluminum)', 'Cl (Chloride)'),
+            'Na2SO4 (Sodium Sulfate)': ('Na (Sodium)', 'SO4 (Sulphate)'), 'K2SO4 (Potassium Sulfate)': ('K (Potassium)', 'SO4 (Sulphate)'),
+            'CaSO4 (Calcium Sulfate)': ('Ca (Calcium)', 'SO4 (Sulphate)'), 'BaSO4 (Barium Sulfate)': ('Ba (Barium)', 'SO4 (Sulphate)'),
+            'CuSO4 (Copper Sulfate)': ('Cu_II (Cupric)', 'SO4 (Sulphate)'), 'ZnSO4 (Zinc Sulfate)': ('Zn (Zinc)', 'SO4 (Sulphate)'), 'FeSO4 (Iron II Sulfate)': ('Fe_II (Ferrous)', 'SO4 (Sulphate)'),
+            'NaNO3 (Sodium Nitrate)': ('Na (Sodium)', 'NO3 (Nitrate)'), 'KNO3 (Potassium Nitrate)': ('K (Potassium)', 'NO3 (Nitrate)'), 'AgNO3 (Silver Nitrate)': ('Ag (Silver)', 'NO3 (Nitrate)'),
+            'Pb(NO3)2 (Lead Nitrate)': ('Pb_II (Plumbous)', 'NO3 (Nitrate)'), 'Ca(NO3)2 (Calcium Nitrate)': ('Ca (Calcium)', 'NO3 (Nitrate)'),
+            'Na2CO3 (Sodium Carbonate)': ('Na (Sodium)', 'CO3 (Carbonate)'), 'K2CO3 (Potassium Carbonate)': ('K (Potassium)', 'CO3 (Carbonate)'),
+            'CaCO3 (Calcium Carbonate)': ('Ca (Calcium)', 'CO3 (Carbonate)'), 'MgCO3 (Magnesium Carbonate)': ('Mg (Magnesium)', 'CO3 (Carbonate)'),
+            'NaHCO3 (Sodium Bicarbonate)': ('Na (Sodium)', 'HCO3 (Bicarbonate)'),
+            'Na3PO4 (Sodium Phosphate)': ('Na (Sodium)', 'PO4 (Phosphate)'), 'Ca3(PO4)2 (Calcium Phosphate)': ('Ca (Calcium)', 'PO4 (Phosphate)'),
+            'CuO (Copper II Oxide)': ('Cu_II (Cupric)', 'O (Oxide)'), 'ZnO (Zinc Oxide)': ('Zn (Zinc)', 'O (Oxide)'), 'MgO (Magnesium Oxide)': ('Mg (Magnesium)', 'O (Oxide)')
         }
 
-        # Acids mapped to their Anion (H+ is implicit)
+        # Hybridization Mapping for Molecular Geometry
+        self.hybridization_map = {
+            'H2O': 'sp3', 'SO4': 'sp3', 'PO4': 'sp3', 'OH': 'sp3', 'ClO3': 'sp3', 
+            'NH4': 'sp3', 'CH3COO': 'sp3', 'ClO': 'sp3', 'BrO': 'sp3', 'IO': 'sp3',
+            'IO3': 'sp3', 'HSO3': 'sp3', 'HSO4': 'sp3', 'MnO4': 'sp3', 'CrO4': 'sp3',
+            'Cr2O7': 'sp3', 'S2O3': 'sp3', 'AsO3': 'sp3', 'AsO4': 'sp3', 'PO3': 'sp3',
+            'NO3': 'sp2', 'CO3': 'sp2', 'SO3': 'sp2', 'NO2': 'sp2', 'HCO3': 'sp2', 'BO3': 'sp2',
+            'CN': 'sp', 'CO2': 'sp'
+        }
+
         self.acids = {
-            'HCl (Hydrochloric Acid)': 'Cl', 'HNO3 (Nitric Acid)': 'NO3 (Nitrate)', 'HBr (Hydrobromic Acid)': 'Br',
-            'HI (Hydroiodic Acid)': 'I', 'HF (Hydrofluoric Acid)': 'F',
-            'H2SO4 (Sulfuric Acid)': 'SO4 (Sulfate)', 'H2CO3 (Carbonic Acid)': 'CO3 (Carbonate)',
+            'HCl (Hydrochloric Acid)': 'Cl (Chloride)', 'HNO3 (Nitric Acid)': 'NO3 (Nitrate)', 'HBr (Hydrobromic Acid)': 'Br (Bromide)',
+            'HI (Hydroiodic Acid)': 'I (Iodide)', 'HF (Hydrofluoric Acid)': 'F (Fluoride)',
+            'H2SO4 (Sulfuric Acid)': 'SO4 (Sulphate)', 'H2CO3 (Carbonic Acid)': 'CO3 (Carbonate)',
             'H3PO4 (Phosphoric Acid)': 'PO4 (Phosphate)'
         }
         
-        # Bases mapped to their Metal Cation (OH- is implicit)
         self.bases = {
-            'NaOH (Sodium Hydroxide)': 'Na', 'KOH (Potassium Hydroxide)': 'K', 'LiOH (Lithium Hydroxide)': 'Li',
-            'Ca(OH)2 (Calcium Hydroxide)': 'Ca', 'Mg(OH)2 (Magnesium Hydroxide)': 'Mg', 'Ba(OH)2 (Barium Hydroxide)': 'Ba',
-            'Al(OH)3 (Aluminum Hydroxide)': 'Al', 'Fe(OH)3 (Iron III Hydroxide)': 'Fe_III (Ferric)', 'Cu(OH)2 (Copper II Hydroxide)': 'Cu_II (Cupric)'
+            'NaOH (Sodium Hydroxide)': 'Na (Sodium)', 'KOH (Potassium Hydroxide)': 'K (Potassium)', 'LiOH (Lithium Hydroxide)': 'Li (Lithium)',
+            'Ca(OH)2 (Calcium Hydroxide)': 'Ca (Calcium)', 'Mg(OH)2 (Magnesium Hydroxide)': 'Mg (Magnesium)', 'Ba(OH)2 (Barium Hydroxide)': 'Ba (Barium)',
+            'Al(OH)3 (Aluminum Hydroxide)': 'Al (Aluminum)', 'Fe(OH)3 (Iron III Hydroxide)': 'Fe_III (Ferric)', 'Cu(OH)2 (Copper II Hydroxide)': 'Cu_II (Cupric)'
         }
 
-        # Specific targets for decomposition with hardcoded simplified outputs
         self.decomposition_targets = {
             'CaCO3 (Calcium Carbonate)': 'CaO + CO2',
             'H2O2 (Hydrogen Peroxide)': 'H2O + O2',
@@ -74,7 +103,6 @@ class PeriodicTableApp:
             'Ag2O (Silver Oxide)': 'Ag + O2'
         }
 
-        # Reactivity Series (Lower index number = more reactive/electropositive)
         self.reactivity_series = {
             'Li': 1, 'K': 2, 'Ba': 3, 'Sr': 4, 'Ca': 5, 'Na': 6, 'Mg': 7, 
             'Al': 8, 'Mn': 9, 'Zn': 10, 'Cr': 11, 'Fe': 12, 'Cd': 13, 
@@ -85,25 +113,20 @@ class PeriodicTableApp:
     def check_solubility(self, cation, anion):
         """Returns True if the compound is soluble (aq), False if insoluble precipitate (s)."""
         c_base = cation.split('_')[0].split(' ')[0]
-        a_base = anion.split(' ')[0]
+        a_base = anion.split('_')[0].split(' ')[0]
         
-        # Rule 1: Group 1 metals and Ammonium are always soluble
-        if c_base in ['Li', 'Na', 'K', 'Rb', 'Cs', 'NH4']: return True
-        # Rule 2: Nitrates, Chlorates, Acetates are always soluble
-        if a_base in ['NO3', 'ClO3', 'C2H3O2', 'HCO3', 'MnO4']: return True
-        # Rule 3: Chlorides, Bromides, Iodides are soluble EXCEPT Ag, Pb, Hg
-        if a_base in ['Cl', 'Br', 'I']:
+        if c_base in ['Li', 'Na', 'K', 'Rb', 'Cs', 'NH4', 'H']: return True
+        if a_base in ['NO3', 'ClO3', 'CH3COO', 'HCO3', 'MnO4', 'ClO', 'BrO', 'IO', 'IO3', 'HSO3', 'HSO4']: return True
+        if a_base in ['Cl', 'Br', 'I', 'CN']:
             if c_base in ['Ag', 'Pb', 'Hg']: return False
             return True
-        # Rule 4: Sulfates are soluble EXCEPT Ba, Pb, Ca, Sr
         if a_base == 'SO4':
             if c_base in ['Ba', 'Pb', 'Ca', 'Sr']: return False
             return True
-        # Rule 5: Carbonates, Phosphates, Hydroxides are INSOLUBLE except with Group 1
-        if a_base in ['CO3', 'PO4', 'OH', 'PO3', 'O', 'S', 'CrO4', 'Cr2O7']:
+        if a_base in ['CO3', 'PO4', 'OH', 'PO3', 'O', 'S', 'CrO4', 'Cr2O7', 'SO3', 'S2O3', 'SiO3', 'BO3', 'AsO3', 'AsO4', 'AlO3', 'Fe(CN)6', 'ZnO2', 'SnO3', 'AlO2']:
             return False
             
-        return True # Default fallback
+        return True
 
     def format_output(self, status, equation, note):
         color = "#10b981" if status == "Reaction Occurs" else "#ef4444"
@@ -122,35 +145,25 @@ class PeriodicTableApp:
 
     def calculate_criss_cross(self, cation_key, anion_key):
         """Generates a molecular formula using the criss-cross method and applies parentheses properly."""
-        polyatomics = ['OH', 'NO3', 'NO2', 'HCO3', 'ClO3', 'MnO4', 'SO4', 'SO3', 'CO3', 'CrO4', 'Cr2O7', 'PO4', 'PO3', 'NH4']
+        polyatomics = ['OH', 'NO3', 'NO2', 'HCO3', 'ClO3', 'MnO4', 'SO4', 'SO3', 'CO3', 'CrO4', 'Cr2O7', 'PO4', 'PO3', 'NH4', 'CH3COO', 'CN', 'SiO3', 'S2O3', 'ClO', 'BrO', 'IO', 'IO3', 'HSO3', 'HSO4', 'AlO2', 'O2', 'MnO4', 'ZnO2', 'SnO3', 'BO3', 'AsO3', 'AsO4', 'AlO3', 'Fe(CN)6']
         
-        # Clean labels to get just the symbol (e.g., "Fe_II (Ferrous)" -> "Fe")
         c_clean = cation_key.split(' ')[0].split('_')[0]
-        a_clean = anion_key.split(' ')[0]
+        a_clean = anion_key.split(' ')[0].split('_')[0]
         
         v1 = self.metals[cation_key]
         v2 = self.nonmetals[anion_key]
         
-        # Simplify ratio (e.g., Ca=2, O=2 -> CaO)
         common_divisor = math.gcd(v1, v2)
         v1_simp = v1 // common_divisor
         v2_simp = v2 // common_divisor
         
-        # Format Cation side
         if v2_simp > 1:
-            if c_clean in polyatomics:
-                part1 = f"({c_clean}){v2_simp}"
-            else:
-                part1 = f"{c_clean}{v2_simp}"
+            part1 = f"({c_clean}){v2_simp}" if c_clean in polyatomics else f"{c_clean}{v2_simp}"
         else:
             part1 = c_clean
             
-        # Format Anion side
         if v1_simp > 1:
-            if a_clean in polyatomics:
-                part2 = f"({a_clean}){v1_simp}"
-            else:
-                part2 = f"{a_clean}{v1_simp}"
+            part2 = f"({a_clean}){v1_simp}" if a_clean in polyatomics else f"{a_clean}{v1_simp}"
         else:
             part2 = a_clean
             
@@ -171,6 +184,171 @@ How easily an atom loses electrons in a bond. Higher values = readily gives up e
 ### 🔋 Electron Configuration
 The full arrangement of electrons in orbitals (e.g., 1s² 2s² 2p⁶...). 
         """, unsafe_allow_html=True)
+        self.render_orbital_viewer()
+
+    def get_orbital_svg(self, block, size=150):
+        if block == 's':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-pulse 4s infinite ease-in-out;">
+                <circle cx="50" cy="50" r="35" fill="url(#s-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="s-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>'''
+        elif block == 'p':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-spin 10s infinite linear; transform-origin: center;">
+                <path d="M 50 50 C 20 0, 80 0, 50 50 C 20 100, 80 100, 50 50" fill="url(#p-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="p-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>'''
+        elif block == 'd':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-spin 14s infinite linear; transform-origin: center;">
+                <path d="M 50 50 C 20 0, 80 0, 50 50 C 20 100, 80 100, 50 50 M 50 50 C 0 20, 0 80, 50 50 C 100 20, 100 80, 50 50" fill="url(#d-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="d-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>'''
+        elif block == 'f':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-spin 18s infinite linear reverse; transform-origin: center;">
+                <path d="M 50 50 C 30 0, 70 0, 50 50 C 80 0, 100 40, 50 50 C 100 60, 80 100, 50 50 C 70 100, 30 100, 50 50 C 20 100, 0 60, 50 50 C 0 40, 20 0, 50 50" fill="url(#f-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="f-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>'''
+        return ''
+
+    def get_hybridization_svg(self, hybrid_type, size=150):
+        color = "#ec4899"
+        if hybrid_type == 'sp':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-pulse 4s infinite ease-in-out;">
+                <path d="M 50 50 C 30 30, 10 30, 10 50 C 10 70, 30 70, 50 50" fill="url(#hyb-grad)" opacity="0.9" />
+                <path d="M 50 50 C 70 30, 90 30, 90 50 C 90 70, 70 70, 50 50" fill="url(#hyb-grad)" opacity="0.9" />
+                <circle cx="50" cy="50" r="5" fill="#fff" opacity="0.8" />
+                <defs>
+                    <radialGradient id="hyb-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="{color}" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="{color}" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>'''
+        elif hybrid_type == 'sp2':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-spin 10s infinite linear; transform-origin: center;">
+                <defs>
+                    <radialGradient id="hyb-grad-sp2" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="{color}" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="{color}" stop-opacity="0" />
+                    </radialGradient>
+                    <path id="sp2-lobe" d="M 50 50 C 30 30, 30 5, 50 5 C 70 5, 70 30, 50 50" fill="url(#hyb-grad-sp2)" opacity="0.9" />
+                </defs>
+                <use href="#sp2-lobe" />
+                <use href="#sp2-lobe" transform="rotate(120 50 50)" />
+                <use href="#sp2-lobe" transform="rotate(240 50 50)" />
+                <circle cx="50" cy="50" r="5" fill="#fff" opacity="0.8" />
+            </svg>'''
+        elif hybrid_type == 'sp3':
+            return f'''<svg viewBox="0 0 100 100" width="{size}" height="{size}" style="animation: hybrid-spin 14s infinite linear reverse; transform-origin: center;">
+                <defs>
+                    <radialGradient id="hyb-grad-sp3" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="{color}" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="{color}" stop-opacity="0" />
+                    </radialGradient>
+                    <path id="sp3-lobe" d="M 50 50 C 35 30, 35 5, 50 5 C 65 5, 65 30, 50 50" fill="url(#hyb-grad-sp3)" opacity="0.9" />
+                </defs>
+                <use href="#sp3-lobe" transform="rotate(140 50 50)" />
+                <use href="#sp3-lobe" transform="rotate(220 50 50)" />
+                <use href="#sp3-lobe" transform="rotate(180 50 50)" opacity="0.4" />
+                <use href="#sp3-lobe" />
+                <circle cx="50" cy="50" r="5" fill="#fff" opacity="0.8" />
+            </svg>'''
+        return ''
+
+    def render_orbital_viewer(self):
+        st.sidebar.markdown("---")
+        st.sidebar.header("⚛️ Orbital & Hybridization Viewer")
+        
+        st.sidebar.markdown("""
+        <style>
+        @keyframes hybrid-spin {
+            0% { transform: rotate(0deg) scale(0.95); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(0.95); }
+        }
+        @keyframes hybrid-pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+        view_type = st.sidebar.radio("View Mode", ["Metals (Orbitals)", "Nonmetals (Orbitals)", "Compounds (Hybridization)"])
+        
+        if view_type == "Metals (Orbitals)":
+            choice = st.sidebar.selectbox("Select Metal", list(self.metals.keys()))
+            c_base = choice.split('_')[0].split(' ')[0]
+            
+            if c_base in self.hybridization_map:
+                hyb = self.hybridization_map[c_base]
+                st.sidebar.markdown(f"<div style='text-align: center; color: #ec4899; margin-bottom: 20px;'><h3>{c_base} ({hyb} Hybridization)</h3></div>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<div style='display: flex; justify-content: center;'>{self.get_hybridization_svg(hyb)}</div>", unsafe_allow_html=True)
+            else:
+                s_block = ['Li', 'Na', 'K', 'Rb', 'Cs', 'Be', 'Mg', 'Ca', 'Sr', 'Ba', 'H']
+                p_block = ['Al', 'Ga', 'In', 'Sn', 'Tl', 'Pb', 'Bi']
+                f_block = ['U', 'Th']
+                
+                block = 's' if c_base in s_block else 'p' if c_base in p_block else 'f' if c_base in f_block else 'd'
+                
+                st.sidebar.markdown(f"<div style='text-align: center; color: var(--text-main); margin-bottom: 20px;'><h3>{c_base} ({block}-orbital)</h3></div>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<div style='display: flex; justify-content: center;'>{self.get_orbital_svg(block)}</div>", unsafe_allow_html=True)
+            
+        elif view_type == "Nonmetals (Orbitals)":
+            choice = st.sidebar.selectbox("Select Nonmetal", list(self.nonmetals.keys()))
+            c_base = choice.split('_')[0].split(' ')[0]
+            
+            if c_base in self.hybridization_map:
+                hyb = self.hybridization_map[c_base]
+                st.sidebar.markdown(f"<div style='text-align: center; color: #ec4899; margin-bottom: 20px;'><h3>{c_base} ({hyb} Hybridization)</h3></div>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<div style='display: flex; justify-content: center;'>{self.get_hybridization_svg(hyb)}</div>", unsafe_allow_html=True)
+            else:
+                block = 's' if c_base == 'H' else 'p'
+                
+                st.sidebar.markdown(f"<div style='text-align: center; color: var(--text-main); margin-bottom: 20px;'><h3>{c_base} ({block}-orbital)</h3></div>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<div style='display: flex; justify-content: center;'>{self.get_orbital_svg(block)}</div>", unsafe_allow_html=True)
+            
+        else:
+            choice = st.sidebar.selectbox("Select Compound", list(self.compounds.keys()))
+            
+            hyb = 'Ionic'
+            comp_name = choice.split(' ')[0]
+            
+            if comp_name in self.hybridization_map:
+                hyb = self.hybridization_map[comp_name]
+            else:
+                cation_base = self.compounds[choice][0].split(' ')[0]
+                anion_base = self.compounds[choice][1].split(' ')[0]
+                
+                if cation_base in self.hybridization_map:
+                    hyb = self.hybridization_map[cation_base]
+                elif anion_base in self.hybridization_map:
+                    hyb = self.hybridization_map[anion_base]
+            
+            if hyb == 'Ionic':
+                st.sidebar.info(f"{comp_name} is primarily an ionic network or lacks a distinct covalent central atom for hybridization display.")
+            else:
+                st.sidebar.markdown(f"<div style='text-align: center; color: #ec4899; margin-bottom: 20px;'><h3>{comp_name} ({hyb})</h3></div>", unsafe_allow_html=True)
+                st.sidebar.markdown(f"<div style='display: flex; justify-content: center;'>{self.get_hybridization_svg(hyb)}</div>", unsafe_allow_html=True)
 
     def render_reaction_simulator(self):
         st.markdown("---")
@@ -198,7 +376,7 @@ The full arrangement of electrons in orbitals (e.g., 1s² 2s² 2p⁶...).
                 if st.button("React ⚡", use_container_width=True):
                     product = self.calculate_criss_cross(metal, nonmetal)
                     c_base = metal.split('_')[0].split(' ')[0]
-                    a_base = nonmetal.split(' ')[0]
+                    a_base = nonmetal.split('_')[0].split(' ')[0]
                     sol = "(aq)" if self.check_solubility(metal, nonmetal) else "(s)"
                     st.markdown(self.format_output(
                         "Reaction Occurs",

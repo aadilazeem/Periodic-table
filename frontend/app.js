@@ -29,6 +29,14 @@ class ChemicalElement {
         this.oxidation = improvedOxidationData[this.sym] || data[10];
         this.exception = data[11];
 
+        this.period = this.row;
+        this.group = (this.catId === 9 || this.catId === 10) ? 3 : this.col;
+        
+        if (this.catId === 9 || this.catId === 10) this.block = 'f';
+        else if (this.group === 1 || this.group === 2 || this.num === 2) this.block = 's';
+        else if (this.group >= 13 && this.group <= 18 && this.num !== 2) this.block = 'p';
+        else this.block = 'd';
+
         const extra = extraData[this.num] || { mp: 'Unknown', bp: 'Unknown', use: 'Unknown' };
         this.mp = extra.mp;
         this.bp = extra.bp;
@@ -205,6 +213,14 @@ class DashboardUI {
             <div class="stat-row"><span class="stat-label">Atomic Mass:</span> <span class="stat-value">${el.mass} u</span></div>
             <div class="stat-row"><span class="stat-label">Classification:</span> <span class="stat-value" style="color:${el.getCategoryColor()}"><strong>${el.catName}</strong></span></div>
             <div class="stat-row"><span class="stat-label">State of Matter:</span> <span class="stat-value" style="color: ${el.getStateColor()}; text-shadow: 0 0 5px ${el.getStateColor()};"><strong>${stateNames[el.state]}</strong></span></div>
+            
+            <div class="stat-row"><span class="stat-label">Period & Group:</span> <span class="stat-value">Period ${el.period}, Group ${el.group}</span></div>
+            <div class="stat-row"><span class="stat-label">Block (Subshell):</span> <span class="stat-value"><strong>${el.block}-block</strong></span></div>
+            
+            <div style="display: flex; justify-content: center; margin: 15px 0;">
+                ${this.getOrbitalSVG(el.block)}
+            </div>
+
             <div class="stat-row"><span class="stat-label">Electron Config:</span> <span class="stat-value" style="font-family: monospace;">${el.config}</span></div>
             ${exceptionNote}
             <div class="stat-row"><span class="stat-label">Oxidation States:</span> <span class="stat-value">${el.oxidation}</span></div>
@@ -218,6 +234,52 @@ class DashboardUI {
                 <a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(el.name)}+element" target="_blank" style="display: inline-block; padding: 8px 12px; background-color: var(--accent); color: white; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; transition: background-color 0.2s;">🖼️ View Images on Google</a>
             </div>
         `;
+    }
+
+    getOrbitalSVG(block) {
+        const size = 100;
+        if (block === 's') {
+            return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" style="animation: hybrid-pulse 4s infinite ease-in-out;">
+                <circle cx="50" cy="50" r="35" fill="url(#s-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="s-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>`;
+        } else if (block === 'p') {
+            return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" style="animation: hybrid-spin 10s infinite linear; transform-origin: center;">
+                <path d="M 50 50 C 20 0, 80 0, 50 50 C 20 100, 80 100, 50 50" fill="url(#p-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="p-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>`;
+        } else if (block === 'd') {
+            return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" style="animation: hybrid-spin 14s infinite linear; transform-origin: center;">
+                <path d="M 50 50 C 20 0, 80 0, 50 50 C 20 100, 80 100, 50 50 M 50 50 C 0 20, 0 80, 50 50 C 100 20, 100 80, 50 50" fill="url(#d-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="d-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>`;
+        } else if (block === 'f') {
+            return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" style="animation: hybrid-spin 18s infinite linear reverse; transform-origin: center;">
+                <path d="M 50 50 C 30 0, 70 0, 50 50 C 80 0, 100 40, 50 50 C 100 60, 80 100, 50 50 C 70 100, 30 100, 50 50 C 20 100, 0 60, 50 50 C 0 40, 20 0, 50 50" fill="url(#f-grad)" opacity="0.9" />
+                <defs>
+                    <radialGradient id="f-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.9" />
+                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+            </svg>`;
+        }
+        return '';
     }
 
     renderCompare(compareSelection) {

@@ -23,7 +23,6 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .header-controls {
@@ -34,6 +33,8 @@ body {
     margin-bottom: 25px;
     width: 100%;
     max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .button-group {
@@ -68,6 +69,10 @@ button.reaction-mode.active { background-color: var(--reaction-active); border-c
 /* Period and Group Labels */
 .table-wrapper {
     display: flex; gap: 15px; margin-bottom: 30px; position: relative;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .period-labels {
@@ -126,7 +131,7 @@ button.reaction-mode.active { background-color: var(--reaction-active); border-c
 .state-indicator { font-size: 7px; font-weight: bold; opacity: 0.8; }
 
 /* Panels */
-.dashboard { display: flex; gap: 20px; width: 100%; max-width: 1200px; flex-wrap: wrap; }
+.dashboard { display: flex; gap: 20px; width: 100%; max-width: 1200px; flex-wrap: wrap; margin-left: auto; margin-right: auto; }
 .panel { 
     flex: 1; 
     min-width: 350px; 
@@ -171,13 +176,13 @@ button.reaction-mode.active { background-color: var(--reaction-active); border-c
     outline: none;
 }
 
-.legend { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 15px; font-size: 12px; max-width: 1200px; }
+.legend { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 15px; font-size: 12px; max-width: 1200px; justify-content: center; margin-left: auto; margin-right: auto; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-color { width: 20px; height: 20px; border-radius: 3px; border: 1px solid var(--border-color); }
 .gradient-bar { width: 200px; height: 12px; border-radius: 6px; }
 .element-detail { background-color: rgba(59, 130, 246, 0.1); border-left: 3px solid var(--accent); padding: 10px; border-radius: 4px; margin-bottom: 15px; }
 
-.f-block-container { margin-top: 20px; width: 100%; max-width: 1200px; }
+.f-block-container { margin-top: 20px; width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; overflow-x: auto; }
 .f-block-label { font-size: 12px; font-weight: bold; color: var(--accent); margin-bottom: 10px; }
 .f-block { display: grid; grid-template-columns: repeat(15, 60px); gap: 4px; }
 
@@ -188,3 +193,63 @@ button.reaction-mode.active { background-color: var(--reaction-active); border-c
     .symbol { font-size: 14px; }
     .element-name, .dynamic-value { font-size: 7px; }
 }
+
+/* Orbital Animations */
+@keyframes orbital-pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+@keyframes orbital-spin {
+    0% { transform: rotate(0deg) scale(0.95); }
+    50% { transform: rotate(180deg) scale(1.05); }
+    100% { transform: rotate(360deg) scale(0.95); }
+}
+
+.orbital-svg {
+    filter: drop-shadow(0 0 5px currentColor);
+}
+.s-orbital {
+    animation: orbital-pulse 3s infinite ease-in-out;
+}
+.p-orbital {
+    animation: orbital-spin 8s infinite linear;
+    transform-origin: center;
+}
+.d-orbital {
+    animation: orbital-spin 12s infinite linear;
+    transform-origin: center;
+}
+.f-orbital {
+    animation: orbital-spin 16s infinite linear reverse;
+    transform-origin: center;
+}
+
+/* Hybridization Animations */
+@keyframes hybrid-spin {
+    0% { transform: rotate(0deg) scale(0.95); }
+    50% { transform: rotate(180deg) scale(1.05); }
+    100% { transform: rotate(360deg) scale(0.95); }
+}
+@keyframes hybrid-pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.sp-hybrid { animation: hybrid-pulse 4s infinite ease-in-out; }
+.sp2-hybrid { animation: hybrid-spin 10s infinite linear; transform-origin: center; }
+.sp3-hybrid { animation: hybrid-spin 14s infinite linear reverse; transform-origin: center; }
+
+ @ k e y f r a m e s   h y b r i d - s p i n   { 
+         0 %   {   t r a n s f o r m :   r o t a t e ( 0 d e g )   s c a l e ( 0 . 9 5 ) ;   } 
+         5 0 %   {   t r a n s f o r m :   r o t a t e ( 1 8 0 d e g )   s c a l e ( 1 . 0 5 ) ;   } 
+         1 0 0 %   {   t r a n s f o r m :   r o t a t e ( 3 6 0 d e g )   s c a l e ( 0 . 9 5 ) ;   } 
+ } 
+ @ k e y f r a m e s   h y b r i d - p u l s e   { 
+         0 %   {   t r a n s f o r m :   s c a l e ( 0 . 9 5 ) ;   o p a c i t y :   0 . 8 ;   } 
+         5 0 %   {   t r a n s f o r m :   s c a l e ( 1 . 0 5 ) ;   o p a c i t y :   1 ;   } 
+         1 0 0 %   {   t r a n s f o r m :   s c a l e ( 0 . 9 5 ) ;   o p a c i t y :   0 . 8 ;   } 
+ } 
+  
+ 
